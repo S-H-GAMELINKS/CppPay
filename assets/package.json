@@ -1,4 +1,7 @@
 {
+    "scripts": {
+        "build": "webpack"
+    },
     "dependencies": {
         "vue": "^2.5.21",
         "webpack": "^4.28.0",
