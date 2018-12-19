@@ -11,3 +11,4 @@ Makefile
 /tests/CMakeFiles/
 /test/Makefile
 /tests/CTestTestfile.cmake
+/assets/index.js
