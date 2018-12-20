@@ -1012,6 +1012,11 @@ detect-libc@^1.0.2:
   resolved "https://registry.yarnpkg.com/detect-libc/-/detect-libc-1.0.3.tgz#fa137c4bd698edf55cd5cd02ac559f91a4c4ba9b"
   integrity sha1-+hN8S9aY7fVc1c0CrFWfkaTEups=
 
+dialog-polyfill@^0.4.7:
+  version "0.4.10"
+  resolved "https://registry.yarnpkg.com/dialog-polyfill/-/dialog-polyfill-0.4.10.tgz#c4ea68a0deed4abb59a6a2a025c548b278cd532e"
+  integrity sha512-j5yGMkP8T00UFgyO+78OxiN5vC5dzRQF3BEio+LhNvDbyfxWBsi3sfPArDm54VloaJwy2hm3erEiDWqHRC8rzw==
+
 diffie-hellman@^5.0.0:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/diffie-hellman/-/diffie-hellman-5.0.3.tgz#40e8ee98f55a2149607146921c63e1ae5f3d2875"
@@ -1267,6 +1272,13 @@ firebase@^5.7.0:
     "@firebase/messaging" "0.3.7"
     "@firebase/polyfill" "0.3.3"
     "@firebase/storage" "0.2.4"
+
+firebaseui@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/firebaseui/-/firebaseui-3.5.0.tgz#a7d5cbc51a218ea0ee8dea5e581c487f15ab3533"
+  integrity sha512-JO+guOiJSJqeF27jgVSLQ5zmVcZxGvSJbdqHjyY/CxxWOOIjmxLIQBT+30qewcYKbsyVLnAl2fYF1ftL52B8hg==
+  dependencies:
+    dialog-polyfill "^0.4.7"
 
 flush-write-stream@^1.0.0:
   version "1.0.3"
