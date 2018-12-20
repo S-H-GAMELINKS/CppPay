@@ -3,18 +3,28 @@
         <h1>Title:{{title}}</h1>
         <h2>Price:{{price}}</h2>
         <h2>{{content}}</h2>
+        <vue-q-art :config=config></vue-q-art>
     </div>    
 </template>
 
 <script>
+import VueQArt from 'vue-qart';
 
 export default {
     data: function() {
         return {
             title: "",
             content: "",
-            price: ""
+            price: "",
+            config: {
+                value: "",
+                imagePath: "../../img/qr.jpg",
+                filter: "color",
+            }
         }
+    },
+    components: {
+        VueQArt
     },
     mounted: function() {
         this.getProducts();
@@ -34,6 +44,7 @@ export default {
                         this.title = product[i][1];
                     } else if (product[i][0] === "price") {
                         this.price = product[i][1];
+                        this.config.value = product[i][1];
                     }
                 }
             }, (errorObject) => {

@@ -35,13 +35,24 @@ int main()
     // create a server
     server server;
 
-    auto routers = std::experimental::make_array("/", "/about", "/contact", "/payment",
+    auto routers = std::experimental::make_array("/", "/about", "/contact", "/payment"
                                                 "/products", "/products/-([0-9a-zA-Z]{19})", 
                                                 "/products/create", "/products/edit/-([0-9a-zA-Z]{19})");
 
     auto javascripts = std::experimental::make_array("/index.js", "/products/index.js", "/products/edit/index.js");
 
     auto router = server.create_router("/");
+
+    router->handle_request(request_method::GET,
+                        "/img/qr.jpg",
+                        [](auto req) -> response
+                        {
+                            response resp = response::from_file("./assets/img/qr.jpg");
+                              
+                            resp.content_type = "image/jpg";
+                              
+                            return resp;
+                        });
 
     for (auto&& j : javascripts)
         router->handle_request(request_method::GET, j,[] (auto req) -> response {
