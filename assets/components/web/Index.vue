@@ -2,7 +2,7 @@
 <div>
     <h1>Index Pages</h1>
 
-    <button v-if="this.$store.state.session" v-on:click="loginCppPay" class="btn btn-primary">Login to GitHub</button>
+    <button v-if="!this.$store.state.session" v-on:click="loginCppPay" class="btn btn-primary">Login to GitHub</button>
 </div>    
 </template>
 
@@ -18,6 +18,9 @@ export default {
             firebase.auth().onAuthStateChanged((response) => {
                 if (response) {
                     this.$store.commit('getSession', true);
+                    router.push({path: '/'});
+                } else {
+                    this.$store.commit('getSession', false);
                     router.push({path: '/'});
                 }
             }, (error) => {

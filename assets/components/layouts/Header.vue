@@ -11,8 +11,24 @@
                     <router-link to="/about" class="dropdown-item">About</router-link>
                     <router-link to="/contact" class="dropdown-item">Contact</router-link>
                     <router-link to="/products" class="dropdown-item">Products</router-link>
+                    <router-link to="/" class="dropdown-item" v-if="this.$store.state.session" v-on:click.native="logOut">LogOut</router-link>
                 </div>
             </div>
         </nav>
     </div>    
 </template>
+
+<script>
+
+import firebase from 'firebase';
+
+export default {
+    methods: {
+        logOut: function() {
+            firebase.auth().signOut();
+            this.$store.commit('deleteSession', false);
+            console.log(this.$store.state)
+        }
+    }
+}
+</script>
