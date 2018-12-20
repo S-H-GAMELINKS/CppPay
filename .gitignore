@@ -12,3 +12,4 @@ Makefile
 /test/Makefile
 /tests/CTestTestfile.cmake
 /assets/index.js
+/assets/.env
