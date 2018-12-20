@@ -1,4 +1,5 @@
 #include <iostream>
+#include <experimental/array>
 #include <luna/luna.h>
 #include <nlohmann/json.hpp>
 #include "logger.h"
@@ -33,22 +34,27 @@ int main()
 
     // create a server
     server server;
-    // add endpoints
 
-    // API example, served from /api
-    auto api = server.create_router("/api");
-    api->handle_request(request_method::GET, "/endpoint",
-                       [](auto request) -> response
-                       {
-                           nlohmann::json retval;
-                           retval["made_it"] = true;
-                           return retval.dump();
-                       });
+    auto routers = std::experimental::make_array("/", "/about", "/contact");
 
-    // File serving example; serve files from the assets folder on /
-    auto static_assets = server.create_router("/");
-    static_assets->serve_files("/", "assets");
+    auto javascripts = std::experimental::make_array("/index.js");
 
+    auto router = server.create_router("/");
+
+    for (auto&& j : javascripts)
+        router->handle_request(request_method::GET, j,[] (auto req) -> response {
+                response res = response::from_file("./assets/index.js");
+                res.content_type = "text/javascript";
+                return res;
+            });
+
+    for(auto&& r : routers)
+        router->handle_request(request_method::GET, 
+                            r, 
+                            [](auto request) -> response { 
+                                response res = response::from_file("./assets/index.html");
+                            return res;
+                        });
 
     server.start(port);
 
