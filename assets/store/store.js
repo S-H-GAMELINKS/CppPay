@@ -41,11 +41,25 @@ const store = new Vuex.Store({
             state.session = bool;
         }
     },
-    plugins: [ createPersistedState({
-        key: 'loginSession',
-        paths: ['session'],
-        storage: window.sessionStorage,
-    })]
+    plugins: [ createPersistedState(
+        {
+            key: 'loginSession',
+            paths: ['session'],
+            storage: window.sessionStorage,
+        }),
+        createPersistedState(
+        {
+            key: 'loginId',
+            paths: ['id'],
+            storage: window.sessionStorage,
+        }),
+        createPersistedState(
+        {
+            key: 'loginName',
+            paths: ['name'],
+            storage: window.sessionStorage,
+        }
+        )]
 });
 
 export default store;

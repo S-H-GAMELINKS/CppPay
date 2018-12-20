@@ -18,15 +18,15 @@ export default {
     data: function() {
         return {
             products: [],
-            uid: this.$store.state.uid,
+            uid: this.$store.state.id,
             login: this.$store.state.session
         }
     },
     mounted: function() {
-       this.getBlogs();
+       this.getProducts();
     },
     methods: {
-        getBlogs: function() {
+        getProducts: function() {
             console.log(this.$store.state.database);
             const data = this.$store.state.database.ref('products');
             data.on("value", (snapshot) => {
@@ -36,7 +36,7 @@ export default {
                 
                 this.products.length = 0;
                 for(var i = 0; i < products.length; i++) {
-                    this.products.push({id: products[i][0], title: products[i][1].title});
+                    this.products.push({id: products[i][0], title: products[i][1].title, uid: products[i][1].uid});
                 }
             }, (errorObject) => {
                 console.log("The read failed: " + errorObject.code);
