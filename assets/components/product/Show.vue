@@ -47,6 +47,8 @@ export default {
                         this.config.value = product[i][1];
                     }
                 }
+
+                console.log(this.config)
             }, (errorObject) => {
                 console.log("The read failed: " + errorObject.code);
             })

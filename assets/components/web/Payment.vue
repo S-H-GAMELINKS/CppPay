@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import { QrcodeReader } from 'vue-qrcode-reader'
+import { QrcodeReader } from 'vue-qrcode-reader';
+import axios from 'axios';
 
 export default {
     components: { 
@@ -33,7 +34,23 @@ export default {
             }
         },
         onDecode: function(decodedString) {
-            console.log(decodedString);
+            const price = decodedString;
+
+            const data = this.$store.state.database.ref('users/' + this.$store.state.id);
+
+            data.on("value", (snapshot) => {
+                const get_token = Object.entries(snapshot.val());
+                const token = get_token[0][1];
+                console.log(token);
+
+                axios({method: 'post', headers: {Authorization: process.env.SECRET }, url: 'https://api.pay.jp/v1/charges', data: {amount: price, currency: 'jpy', token: token}}).then((response) => {
+                    console.log(response);
+                }, (error) => {
+                    console.log(error);
+                })
+            }, (errorObject) => {
+                console.log("The read failed: " + errorObject.code);
+            })
         }
     }
 }
