@@ -1,6 +1,7 @@
 <template>
     <div class="container">
-        <h1>{{title}}</h1>
+        <h1>Title:{{title}}</h1>
+        <h2>Price:{{price}}</h2>
         <h2>{{content}}</h2>
     </div>    
 </template>
@@ -11,7 +12,8 @@ export default {
     data: function() {
         return {
             title: "",
-            content: ""
+            content: "",
+            price: ""
         }
     },
     mounted: function() {
@@ -24,15 +26,16 @@ export default {
             const data = this.$store.state.database.ref('products' + path);
             
             data.on("value", (snapshot) => {
-                const blog = Object.entries(snapshot.val());
-                for(var i = 0; i < blog.length; i++) {
-                    if(blog[i][0] === "content") {
-                        this.content = blog[i][1]
-                    } else if (blog[i][0] === "title") {
-                        this.title = blog[i][1];
+                const product = Object.entries(snapshot.val());
+                for(var i = 0; i < product.length; i++) {
+                    if(product[i][0] === "content") {
+                        this.content = product[i][1]
+                    } else if (product[i][0] === "title") {
+                        this.title = product[i][1];
+                    } else if (product[i][0] === "price") {
+                        this.price = product[i][1];
                     }
                 }
-                console.log(blog)
             }, (errorObject) => {
                 console.log("The read failed: " + errorObject.code);
             })
