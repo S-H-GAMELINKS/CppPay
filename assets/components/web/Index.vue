@@ -32,7 +32,13 @@ export default {
             const provider = this.$store.state.provider;
 
             firebase.auth().signInWithPopup(provider).then((response) => {
-                this.$store.commit('loginCppPay', response.uid, response.name, true);
+                console.log(response)
+                console.log(response.additionalUserInfo.profile.name)
+                console.log(response.additionalUserInfo.username)
+                const name = response.additionalUserInfo.profile.name;
+                this.$store.commit('loginCppPay', response.user.uid);
+                this.$store.commit('setUserName', response.additionalUserInfo.profile.name);
+                console.log(this.$store.state)
             }, (error) => {
                 console.log(error)
             })

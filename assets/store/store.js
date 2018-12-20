@@ -28,10 +28,11 @@ const store = new Vuex.Store({
         provider: provider
     },
     mutations: {
-        loginCppPay(state, id, name, session) {
+        loginCppPay(state, id) {
             state.id = String(id);
-            state.name = name;
-            state.session = session;
+        },
+        setUserName(state, name) {
+            state.name = String(name);
         },
         getSession(state, bool) {
             state.session = bool;
