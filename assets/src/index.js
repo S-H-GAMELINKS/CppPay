@@ -16,10 +16,5 @@ const app = new Vue({
     store: Store,
     components: {
         'nav-bar': Header,
-    },
-    data: function() {
-        return {
-            message: "Hello World!"
-        }
     }
 })
