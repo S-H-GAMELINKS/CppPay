@@ -16,16 +16,22 @@ const firebase = FireBase.initializeApp({
 
 const database = firebase.database();
 
+const provider = new FireBase.auth.GithubAuthProvider();
+
 const store = new Vuex.Store({
     state: {
         firebase: firebase,
         database: database,
         id: "",
-        session: false
+        name: "",
+        session: false,
+        provider: provider
     },
     mutations: {
-        loginBlog(state, id) {
+        loginCppPay(state, id, name, session) {
             state.id = String(id);
+            state.name = name;
+            state.session = session;
         },
         getSession(state, bool) {
             state.session = bool;
