@@ -8,6 +8,12 @@
     </div>
     <div class="input-group">
         <div class="input-group-append">
+            <span class="input-group-text">Price</span>
+        </div>
+        <input type="text" class="form-control" v-model="price" placeholder="Input price title..."> 
+    </div>
+    <div class="input-group">
+        <div class="input-group-append">
             <span class="input-group-text">Content</span>
         </div>
         <textarea v-model="content" class="form-control" placeholder="Input product content..."></textarea>
@@ -39,15 +45,22 @@ export default {
             const data = this.$store.state.database.ref('products' + path);
             
             data.on("value", (snapshot) => {
-                const blog = Object.entries(snapshot.val());
-                this.title = blog[1][1];
-                this.content = blog[0][1]
+                const product = Object.entries(snapshot.val());
+                for(var i = 0; i < product.length; i++) {
+                    if(product[i][0] === "content") {
+                        this.content = product[i][1]
+                    } else if (product[i][0] === "title") {
+                        this.title = product[i][1];
+                    } else if (product[i][0] === "price") {
+                        this.price = product[i][1];
+                    }
+                }
             }, (errorObject) => {
                 console.log("The read failed: " + errorObject.code);
             })
         },
         updateProduct: function() {
-            const path = String(this.$route.path).replace(/blogs\/edit/, '');
+            const path = String(this.$route.path).replace(/products\/edit/, '');
             const data = this.$store.state.database.ref('products' + path);
             data.set({
                 title: this.title,
