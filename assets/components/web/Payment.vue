@@ -1,12 +1,40 @@
 <template>
     <div class="container">
-
-
+        <qrcode-reader @init="onInit" @decode="onDecode"></qrcode-reader>
     </div>
 </template>
 
 <script>
-export default {
+import { QrcodeReader } from 'vue-qrcode-reader'
 
+export default {
+    components: { 
+        QrcodeReader 
+    },
+    methods: {
+        async onInit (promise) {
+            try {
+                await promise
+            } catch (error) {
+                if (error.name === 'NotAllowedError') {
+            } else if (error.name === 'NotFoundError') {
+            // no suitable camera device installed
+            } else if (error.name === 'NotSupportedError') {
+                // page is not served over HTTPS (or localhost)
+                } else if (error.name === 'NotReadableError') {
+                // maybe camera is already in use
+                } else if (error.name === 'OverconstrainedError') {
+                // passed constraints don't match any camera. Did you requested the front camera although there is none?
+                } else {
+                // browser is probably lacking features (WebRTC, Canvas)
+                }
+            } finally {
+
+            }
+        },
+        onDecode: function(decodedString) {
+            console.log(decodedString);
+        }
+    }
 }
 </script>

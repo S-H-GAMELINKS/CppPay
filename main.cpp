@@ -35,7 +35,7 @@ int main()
     // create a server
     server server;
 
-    auto routers = std::experimental::make_array("/", "/about", "/contact",
+    auto routers = std::experimental::make_array("/", "/about", "/contact", "/payment",
                                                 "/products", "/products/-([0-9a-zA-Z]{19})", 
                                                 "/products/create", "/products/edit/-([0-9a-zA-Z]{19})");
 
