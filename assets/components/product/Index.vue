@@ -3,8 +3,8 @@
     <div class="container">
         <p v-for="(product, key, index) in products" :key=index>
             <router-link :to="{name: 'products', params: {id: product.id}}">{{product.title}}</router-link>
-            <router-link :to="{name: 'edits', params: {id: product.id}}" v-if="login && product.uid == uid">Edit</router-link>
-            <button v-if="login && product.uid == uid" v-on:click="deleteProduct(product.id)">Delete</button>
+            <router-link :to="{name: 'edits', params: {id: product.id}}" v-if="login && product.uid === uid">Edit</router-link>
+            <button v-if="login && product.uid === uid" v-on:click="deleteProduct(product.id)">Delete</button>
         </p>
     </div>
     <div class="container" v-if="login">
@@ -42,10 +42,9 @@ export default {
                 console.log("The read failed: " + errorObject.code);
             })         
         },
-        deleteBlog: function(id) {
-            const data = this.$store.state.database.ref('cppblog/' + String(id));
+        deleteProduct: function(id) {
+            const data = this.$store.state.database.ref('products/' + String(id));
             data.remove();
-            this.$foreceUpdate();
         }
     }
 }
