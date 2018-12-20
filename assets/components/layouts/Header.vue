@@ -11,6 +11,7 @@
                     <router-link to="/about" class="dropdown-item">About</router-link>
                     <router-link to="/contact" class="dropdown-item">Contact</router-link>
                     <router-link to="/products" class="dropdown-item">Products</router-link>
+                    <router-link to="/user" class="dropdown-item" v-if="this.$store.state.session">User</router-link>
                     <router-link to="/payment" class="dropdown-item" v-if="this.$store.state.session">Payment</router-link>
                     <router-link to="/" class="dropdown-item" v-if="this.$store.state.session" v-on:click.native="logOut">LogOut</router-link>
                 </div>
